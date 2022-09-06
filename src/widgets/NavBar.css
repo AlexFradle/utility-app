@@ -1,0 +1,32 @@
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 4px;
+}
+
+#sel-indicator {
+    position: absolute;
+    height: 4px;
+    background-color: var(--main-col);
+}
+
+#hover-indicator {
+    position: absolute;
+    height: 4px;
+    background-color: var(--accent-col);
+    transition: all 0.2s;
+}
+
+.nav-item::before {
+    font-size: 2em;
+    content: "[";
+    vertical-align: middle;
+    color: var(--accent-col);
+}
+
+.nav-item::after {
+    font-size: 2em;
+    content: "]";
+    vertical-align: middle;
+    color: var(--accent-col);
+}
