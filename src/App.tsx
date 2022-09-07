@@ -3,16 +3,22 @@ import { invoke } from "@tauri-apps/api/tauri";
 import NavBar from "./widgets/NavBar";
 import HomeScreen from "./screens/HomeScreen";
 import "./App.css";
+import TodoScreen from "./screens/TodoScreen";
 
 function App() {
     const [selected, setSelected] = useState(0);
-    const screens = [
-        <HomeScreen />,
+    const screens: [string, JSX.Element][] = [
+        ["Dashboard", <HomeScreen />],
+        ["TODO", <TodoScreen />]
     ];
     return (
         <div className="container">
-            <NavBar />
-            {screens[selected]}
+            <NavBar 
+                selectedIndex={selected} 
+                titles={screens.map(s => s[0])} 
+                indCallback={newInd => {setSelected(newInd)}}
+            />
+            {screens[selected][1]}
         </div>
     );
 }

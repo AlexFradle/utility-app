@@ -1,0 +1,20 @@
+.todo-item-container {
+    display: flex;
+    align-items: center;
+}
+
+.todo-checkbox {
+    border: 2px solid var(--accent-col);
+    height: 1em;
+    width: 1em;
+    margin: 1em;
+    cursor: pointer;
+    transition: all var(--animation-time);
+}
+
+.box-checked {
+    background-color: var(--main-col);
+}
+.text-checked {
+    text-decoration: line-through;
+}
