@@ -1,24 +1,21 @@
 .nav-container {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    align-items: center;
     margin-bottom: 4px;
+    grid-auto-columns: 1fr;
 }
 
 .nav-item {
-    transition: all var(--animation-time);
-    cursor: pointer;
+    grid-row: 1;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-right: 2px solid var(--accent-col);
 }
 
-.sel-indicator {
-    position: absolute;
-    height: 4px;
-    pointer-events: none;
-    transition: all var(--animation-time);
-}
-
-.selected {
-    background-color: rgb(0, 255, 0);
-    z-index: -10;
+.nav-item:first-child {
+    border-left: 2px solid var(--accent-col);
 }
 
 #hover-indicator {
@@ -26,10 +23,6 @@
     height: 4px;
     background-color: var(--main-col);
     transition: all var(--animation-time);
-}
-
-.text-black {
-    color: black;
 }
 
 .nav-item::before {
@@ -40,10 +33,9 @@
     transition: all var(--animation-time);
 }
 
-.sel-nav-item::before {
-    font-size: 2em;
+.nav-item.sel-expand-button-inner::before {
+    font-size: 1em;
     content: "[";
-    vertical-align: middle;
     color: black;
     transition: all var(--animation-time);
 }
@@ -56,10 +48,9 @@
     transition: all var(--animation-time);
 }
 
-.sel-nav-item::after {
-    font-size: 2em;
+.nav-item.sel-expand-button-inner::after {
+    font-size: 1em;
     content: "]";
-    vertical-align: middle;
     color: black;
     transition: all var(--animation-time);
 }

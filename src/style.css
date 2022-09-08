@@ -7,6 +7,11 @@
     --main-col: #00ff00;
     --accent-col: #005f00;
     --animation-time: 0.2s;
+    --animation-time-sec: 1s;
+}
+
+html {
+    box-sizing: border-box;
 }
 
 body {

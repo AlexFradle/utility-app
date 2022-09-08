@@ -5,6 +5,9 @@
 }
 
 .expand-button-inner {
+    color: var(--main-col);
+    transition: all var(--animation-time-sec);
+    cursor: pointer;
 }
 
 .sel-expand-button-outer {

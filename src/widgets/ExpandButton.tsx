@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, ReactNode, HTMLAttributes} from "react";
 import {AnimationType} from "../types";
 import "./ExpandButton.css";
 
@@ -7,12 +7,21 @@ type ExpandButtonProps = {
     expandCallback: (newState: boolean) => void;
     id: number;
     type: AnimationType;
+    buttonContent: ReactNode;
+    isToggle: boolean;
+    bgFade: boolean;
+    containerClass?: string;
+    containerAttributes?: HTMLAttributes<HTMLDivElement>;
 };
 
 const ExpandButton = (props: ExpandButtonProps) => {
     useEffect(() => {
         shrink();
     }, []);
+
+    useEffect(() => {
+        props.isExpanded || shrink();
+    }, [props.isExpanded]);
 
     const shrink = () => {
         const self = document.getElementById(getOuterId())!;
@@ -88,18 +97,25 @@ const ExpandButton = (props: ExpandButtonProps) => {
         <>
             <div
                 className="expand-button-outer" 
+                style={!props.bgFade ? { backgroundColor: "var(--main-col)" } : undefined}
                 id={getOuterId()}
             ></div>
             <div
                 id={getInnerId()}
-                onClick={() => {
-                    const ns = !props.isExpanded;
-                    props.expandCallback(ns);
-                    ns ? expand() : shrink();
+                onClick={e => {
+                    if (props.isToggle) {
+                        const ns = !props.isExpanded;
+                        props.expandCallback(ns);
+                        ns ? expand() : shrink();
+                    } else {
+                        props.expandCallback(true);
+                        expand();
+                    }
                 }}
-                className="expand-button-inner"
+                className={`expand-button-inner ${props.containerClass ?? ""}`}
+                {...props.containerAttributes}
             >
-                Text
+                {props.buttonContent}
             </div>
         </>
     );
