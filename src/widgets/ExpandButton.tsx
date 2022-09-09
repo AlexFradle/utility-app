@@ -1,14 +1,19 @@
 import {useEffect, ReactNode, HTMLAttributes} from "react";
 import {AnimationType} from "../types";
+import {animate} from "../utils";
 import "./ExpandButton.css";
 
 type ExpandButtonProps = {
     isExpanded: boolean;
     expandCallback: (newState: boolean) => void;
-    id: number;
+    id: string;
     type: AnimationType;
-    buttonContent: ReactNode;
+    innerContent: ReactNode;
+
+    // true:  pressing will toggle on and off
+    // false: press will only expand (NavBar)
     isToggle: boolean;
+
     bgFade: boolean;
     containerClass?: string;
     containerAttributes?: HTMLAttributes<HTMLDivElement>;
@@ -20,74 +25,21 @@ const ExpandButton = (props: ExpandButtonProps) => {
     }, []);
 
     useEffect(() => {
-        props.isExpanded || shrink();
+        props.isExpanded ? expand() : shrink();
     }, [props.isExpanded]);
 
     const shrink = () => {
-        const self = document.getElementById(getOuterId())!;
-        const inner = document.getElementById(getInnerId())!;
-        const dims = inner.getBoundingClientRect();
-        self.classList.remove("sel-expand-button-outer");
-        inner.classList.remove("sel-expand-button-inner");
-        switch (props.type) {
-            case AnimationType.CenterExpand:
-                self.style.top = `${dims.y + dims.height / 2}px`;
-                self.style.left = `${dims.x + dims.width / 2}px`;
-                self.style.width = "0px";
-                self.style.height = "0px";
-                break;
-            case AnimationType.CenterLeftRight:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x + dims.width / 2}px`;
-                self.style.width = "0px";
-                self.style.height = `${dims.height}px`;
-                break;
-            case AnimationType.LeftRight:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x}px`;
-                self.style.width = "0px";
-                self.style.height = `${dims.height}px`;
-                break;
-            case AnimationType.RightLeft:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x + dims.width}px`;
-                self.style.width = "0px";
-                self.style.height = `${dims.height}px`;
-                break;
-            case AnimationType.TopBottom:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x}px`;
-                self.style.width = `${dims.width}px`;
-                self.style.height = "0px";
-                break;
-            case AnimationType.BottomTop:
-                self.style.top = `${dims.y + dims.height}px`;
-                self.style.left = `${dims.x}px`;
-                self.style.width = `${dims.width}px`;
-                self.style.height = "0px";
-                break;
-        }
+        animate(getOuterId(), getInnerId(), props.type, false, (self, inner) => {
+            self.classList.remove("sel-expand-button-outer");
+            inner.classList.remove("sel-expand-button-inner");
+        });
     };
 
     const expand = () => {
-        const self = document.getElementById(getOuterId())!;
-        const inner = document.getElementById(getInnerId())!;
-        const dims = inner.getBoundingClientRect();
-        self.classList.add("sel-expand-button-outer");
-        inner.classList.add("sel-expand-button-inner");
-        switch (props.type) {
-            case AnimationType.CenterExpand:
-            case AnimationType.CenterLeftRight:
-            case AnimationType.LeftRight:
-            case AnimationType.RightLeft:
-            case AnimationType.TopBottom:
-            case AnimationType.BottomTop:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x}px`;
-                self.style.width = `${dims.width}px`;
-                self.style.height = `${dims.height}px`;
-                break;
-        }
+        animate(getOuterId(), getInnerId(), props.type, true, (self, inner) => {
+            self.classList.add("sel-expand-button-outer");
+            inner.classList.add("sel-expand-button-inner");
+        });
     };
 
     const getOuterId = () => `expand-button-outer-${props.id}`;
@@ -102,20 +54,15 @@ const ExpandButton = (props: ExpandButtonProps) => {
             ></div>
             <div
                 id={getInnerId()}
-                onClick={e => {
-                    if (props.isToggle) {
-                        const ns = !props.isExpanded;
-                        props.expandCallback(ns);
-                        ns ? expand() : shrink();
-                    } else {
-                        props.expandCallback(true);
-                        expand();
-                    }
+                onClick={() => {
+                    props.expandCallback(
+                        props.isToggle ? !props.isExpanded : true
+                    );
                 }}
                 className={`expand-button-inner ${props.containerClass ?? ""}`}
                 {...props.containerAttributes}
             >
-                {props.buttonContent}
+                {props.innerContent}
             </div>
         </>
     );

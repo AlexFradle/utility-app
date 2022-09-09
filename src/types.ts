@@ -4,6 +4,7 @@ export enum AnimationType {
     CenterExpand,
     TopBottom,
     BottomTop,
-    CenterLeftRight,
-    CursorPositionExpand,
+    CenterWidth,
+    LeftRightDown,
+    CenterWidthHeight,
 };

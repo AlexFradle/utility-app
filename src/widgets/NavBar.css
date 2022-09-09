@@ -1,7 +1,7 @@
 .nav-container {
     display: grid;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 20px;
     grid-auto-columns: 1fr;
 }
 
@@ -14,8 +14,17 @@
     border-right: 2px solid var(--accent-col);
 }
 
-.nav-item:first-child {
+/* How to select the first child of parent with a specific class:
+ * Selects all elems with class nav-item that are children of nav-container
+ * giving them a left border.
+ * Then select those same elems but give them border none
+ * if they have a nav-item before them.
+ */
+.nav-container > .nav-item {
     border-left: 2px solid var(--accent-col);
+}
+.nav-container > .nav-item ~ .nav-item {
+    border-left: none;
 }
 
 #hover-indicator {

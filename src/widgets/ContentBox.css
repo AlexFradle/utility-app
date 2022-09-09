@@ -1,0 +1,12 @@
+.content-box {
+    position: absolute;
+    border: 2px solid var(--main-col);
+    transition: all var(--animation-time);
+    pointer-events: none;
+}
+
+.content {
+    opacity: 0;
+    text-align: center;
+    transition: opacity var(--animation-time-sec) calc(var(--animation-time) * 2);
+}

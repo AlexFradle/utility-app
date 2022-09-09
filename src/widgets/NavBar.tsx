@@ -37,11 +37,12 @@ const NavBar = (props: NavBarProps) => {
                 {props.titles.map((title, ind) => {
                     return (
                         <ExpandButton 
-                            buttonContent={title}
+                            innerContent={title}
                             containerClass="nav-item"
                             containerAttributes={{ onMouseOver: () => {moveIndicator(ind)} }}
-                            id={ind}
-                            type={AnimationType.CenterLeftRight}
+                            id={`nav-${ind}`}
+                            key={`nav-${ind}`}
+                            type={AnimationType.CenterWidth}
                             isExpanded={ind === props.selectedIndex}
                             expandCallback={_ => {props.indCallback(ind)}}
                             isToggle={false}

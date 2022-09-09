@@ -1,9 +1,10 @@
 import {ReactNode, useEffect} from "react";
+import "./Strikethrough.css";
 
 type StrikethroughProps = {
     isStrike: boolean;
     innerContent: ReactNode;
-    id: number;
+    id: string;
 };
 
 const Strikethrough = (props: StrikethroughProps) => {
@@ -16,9 +17,9 @@ const Strikethrough = (props: StrikethroughProps) => {
         const inner = document.getElementById(getInnerId())!;
         const dims = inner.getBoundingClientRect();
         self.style.left = `${dims.x}px`;
-        self.style.top = `${dims.y + dims.height / 2}px`;
+        self.style.top = `${dims.y + 1 + dims.height / 2}px`;
         self.style.width = `${dims.width}px`;
-        self.style.height = "2px";
+        self.style.height = "1px";
     };
 
     const unstrike = () => {
@@ -26,9 +27,9 @@ const Strikethrough = (props: StrikethroughProps) => {
         const inner = document.getElementById(getInnerId())!;
         const dims = inner.getBoundingClientRect();
         self.style.left = `${dims.x}px`;
-        self.style.top = `${dims.y + dims.height / 2}px`;
+        self.style.top = `${dims.y + 1 + dims.height / 2}px`;
         self.style.width = "0px";
-        self.style.height = "0px";
+        self.style.height = "1px";
     };
 
     const getOuterId = () => `strikethrough-outer-${props.id}`;

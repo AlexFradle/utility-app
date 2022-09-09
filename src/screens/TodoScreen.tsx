@@ -1,45 +1,52 @@
-import {useState} from "react";
-import TodoItem from "../widgets/TodoItem";
-import ExpandButton from "../widgets/ExpandButton";
+import {useEffect, useState} from "react";
 import {AnimationType} from "../types";
-import Strikethrough from "../widgets/Strikethrough";
+import ContentBox from "../widgets/ContentBox";
+import TodoItem from "../widgets/TodoItem";
 
 const TodoScreen = () => {
     const [todoItems, setTodoItems] = useState<[string, boolean][]>([
         ["do this at some point", false],
         ["do this at some point", true],
     ]);
+
+    const addTodo = () => {
+        setTodoItems(prev => [...prev, ["new todo", false]]);
+    };
+
     return (
         <div className="todo-container">
-            {todoItems.map(([t, c], ind) => {
-                return (
-                    <TodoItem
-                        text={t}
-                        isChecked={c}
-                        checkCallback={(newState) => {setTodoItems(prev => {
-                            return [
-                                ...prev.slice(0, ind),
-                                [prev[ind][0], newState],
-                                ...prev.slice(ind + 1)
-                            ];
-                        })}}
-                    />
-                );
-            })}
-            <ExpandButton 
-                isExpanded={todoItems[0][1]}
-                expandCallback={ns => {setTodoItems(prev => [[prev[0][0], ns], ...prev.slice(1)])}}
-                id={1020023}
-                type={AnimationType.CenterExpand}
-                buttonContent="Name"
-                isToggle={true}
-                bgFade={false}
-            />
-            <Strikethrough
-                isStrike={todoItems[0][1]}
-                innerContent={"text here to strike"}
-                id={0}
-            />
+            <ContentBox
+                id="todo"
+                type={AnimationType.CenterWidthHeight}
+            >
+                {todoItems.map(([t, c], ind) => {
+                    return (
+                        <TodoItem
+                            text={t}
+                            id={`todo-${ind}`}
+                            key={`todo-${ind}`}
+                            isChecked={c}
+                            checkCallback={(newState) => {setTodoItems(prev => {
+                                return [
+                                    ...prev.slice(0, ind),
+                                    [prev[ind][0], newState],
+                                    ...prev.slice(ind + 1)
+                                ];
+                            })}}
+                        />
+                    );
+                })}
+                <div
+                    style={{ 
+                        backgroundColor: "var(--main-col)",
+                        color: "black",
+                        margin: 5,
+                    }}
+                    onClick={addTodo}
+                >
+                    Add TODO
+                </div>
+            </ContentBox>
         </div>
     );
 };
