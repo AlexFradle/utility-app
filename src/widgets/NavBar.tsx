@@ -38,8 +38,8 @@ const NavBar = (props: NavBarProps) => {
                     return (
                         <ExpandButton 
                             innerContent={title}
-                            containerClass="nav-item"
-                            containerAttributes={{ onMouseOver: () => {moveIndicator(ind)} }}
+                            innerClass="nav-item"
+                            innerAttributes={{ onMouseOver: () => {moveIndicator(ind)} }}
                             id={`nav-${ind}`}
                             key={`nav-${ind}`}
                             type={AnimationType.CenterWidth}
@@ -47,6 +47,7 @@ const NavBar = (props: NavBarProps) => {
                             expandCallback={_ => {props.indCallback(ind)}}
                             isToggle={false}
                             bgFade={true}
+                            isPersistent={true}
                         />
                     );
                 })}

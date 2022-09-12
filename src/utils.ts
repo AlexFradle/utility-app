@@ -1,13 +1,36 @@
 import {AnimationType} from "./types";
 
+export const getCssVar = (name: string) => {
+    return {
+        value: getComputedStyle(document.documentElement).getPropertyValue(name),
+        asSeconds: function(backup = 0.2) {
+            try {
+                const res = +this.value.slice(0, -1);
+                return res;
+            } catch(e) {
+                return backup;
+            }
+        },
+    };
+}
+
 export const animate = (
     animObjId: string, 
     innerObjId: string, 
     type: AnimationType,
     isExpand: boolean,
-    beforeFunc?: (animObj: HTMLElement, innerObj: HTMLElement) => void,
-    afterFunc?: (animObj: HTMLElement, innerObj: HTMLElement) => void,
+    optionals?: {
+        beforeFunc?: (animObj: HTMLElement, innerObj: HTMLElement) => void;
+        afterFunc?: (animObj: HTMLElement, innerObj: HTMLElement) => void;
+        offsetX?: number;
+        offsetY?: number;
+    },
 ) => {
+    const beforeFunc = optionals?.beforeFunc;
+    const afterFunc = optionals?.afterFunc;
+    const offsetX = optionals?.offsetX || 0;
+    const offsetY = optionals?.offsetY || 0;
+
     const self = document.getElementById(animObjId);
     const inner = document.getElementById(innerObjId);
     if (self === null || inner === null) return;
@@ -24,8 +47,8 @@ export const animate = (
             case AnimationType.RightLeft:
             case AnimationType.TopBottom:
             case AnimationType.BottomTop:
-                self.style.top = `${dims.y}px`;
-                self.style.left = `${dims.x}px`;
+                self.style.top = `${dims.y + offsetY}px`;
+                self.style.left = `${dims.x + offsetX}px`;
                 self.style.width = `${dims.width}px`;
                 self.style.height = `${dims.height}px`;
                 break;

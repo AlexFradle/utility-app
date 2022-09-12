@@ -9,14 +9,17 @@ type ExpandButtonProps = {
     id: string;
     type: AnimationType;
     innerContent: ReactNode;
+    isPersistent: boolean;
+    bgFade: boolean;
 
     // true:  pressing will toggle on and off
     // false: press will only expand (NavBar)
     isToggle: boolean;
 
-    bgFade: boolean;
-    containerClass?: string;
-    containerAttributes?: HTMLAttributes<HTMLDivElement>;
+    innerClass?: string;
+    innerAttributes?: HTMLAttributes<HTMLDivElement>;
+    outerClass?: string;
+    outerAttributes?: HTMLAttributes<HTMLDivElement>;
 };
 
 const ExpandButton = (props: ExpandButtonProps) => {
@@ -29,29 +32,38 @@ const ExpandButton = (props: ExpandButtonProps) => {
     }, [props.isExpanded]);
 
     const shrink = () => {
-        animate(getOuterId(), getInnerId(), props.type, false, (self, inner) => {
-            self.classList.remove("sel-expand-button-outer");
-            inner.classList.remove("sel-expand-button-inner");
+        animate(getOuterId(), getInnerId(), props.type, false, {
+            beforeFunc: (self, inner) => {
+                self.classList.remove("sel-expand-button-outer");
+                inner.classList.remove("sel-expand-button-inner");
+            }
         });
     };
 
     const expand = () => {
-        animate(getOuterId(), getInnerId(), props.type, true, (self, inner) => {
-            self.classList.add("sel-expand-button-outer");
-            inner.classList.add("sel-expand-button-inner");
+        animate(getOuterId(), getInnerId(), props.type, true, {
+            beforeFunc: (self, inner) => {
+                self.classList.add("sel-expand-button-outer");
+                inner.classList.add("sel-expand-button-inner");
+            }
         });
     };
 
     const getOuterId = () => `expand-button-outer-${props.id}`;
     const getInnerId = () => `expand-button-inner-${props.id}`;
 
+    const makePersistentOuter = () => (
+        <div
+            className={`expand-button-outer ${props.outerClass ?? ""}`}
+            style={!props.bgFade ? { backgroundColor: "var(--main-col)" } : undefined}
+            id={getOuterId()}
+            {...props.outerAttributes}
+        ></div>
+    );
+
     return (
         <>
-            <div
-                className="expand-button-outer" 
-                style={!props.bgFade ? { backgroundColor: "var(--main-col)" } : undefined}
-                id={getOuterId()}
-            ></div>
+            {makePersistentOuter()}
             <div
                 id={getInnerId()}
                 onClick={() => {
@@ -59,8 +71,8 @@ const ExpandButton = (props: ExpandButtonProps) => {
                         props.isToggle ? !props.isExpanded : true
                     );
                 }}
-                className={`expand-button-inner ${props.containerClass ?? ""}`}
-                {...props.containerAttributes}
+                className={`expand-button-inner ${props.innerClass ?? ""}`}
+                {...props.innerAttributes}
             >
                 {props.innerContent}
             </div>

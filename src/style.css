@@ -11,7 +11,6 @@
 }
 
 html {
-    box-sizing: border-box;
     user-select: none;
 }
 
@@ -21,3 +20,25 @@ body {
     font-family: JetBrainsMono;
     font-size: 12pt;
 }
+
+input[type="range"] {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: var(--accent-col);
+}
+
+input[type="range"]:hover {
+    background: linear-gradient(90deg, rgba(0,95,0,1) 0%, rgba(0,255,0,1) 100%);
+}
+
+input[type="range"]::-moz-range-thumb,
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid black;
+    margin-top: -10px;
+    background-color: var(--main-col);
+}
+

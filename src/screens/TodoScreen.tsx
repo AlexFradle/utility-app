@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {AnimationType} from "../types";
 import ContentBox from "../widgets/ContentBox";
 import TodoItem from "../widgets/TodoItem";
+import ClickableButton from "../widgets/ClickableButton";
+import ExpandButton from "../widgets/ExpandButton";
 
 const TodoScreen = () => {
     const [todoItems, setTodoItems] = useState<[string, boolean][]>([
@@ -47,6 +49,11 @@ const TodoScreen = () => {
                     Add TODO
                 </div>
             </ContentBox>
+            <ClickableButton
+                id="test-click"
+                innerContent="test"
+            />
+            <input type="range" />
         </div>
     );
 };

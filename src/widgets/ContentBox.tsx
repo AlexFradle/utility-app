@@ -1,6 +1,6 @@
 import {useEffect, ReactNode, useLayoutEffect} from "react";
 import {AnimationType} from "../types";
-import {animate, expandAnimation, shrinkAnimation} from "../utils";
+import {animate} from "../utils";
 import "./ContentBox.css";
 
 type ContentBoxProps = {
@@ -26,7 +26,12 @@ const ContentBox = (props: ContentBoxProps) => {
     };
 
     const expand = () => {
-        animate(getOuterId(), getInnerId(), props.type, true);
+        animate(
+            getOuterId(), getInnerId(), props.type, true, {
+                offsetX: -2,
+                offsetY: -2
+            }
+        );
     };
 
     const getOuterId = () => `content-box-outer-${props.id}`;

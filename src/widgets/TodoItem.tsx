@@ -27,7 +27,8 @@ const TodoItem = (props: TodoItemProps) => {
                 innerContent=""
                 isToggle={true}
                 bgFade={true}
-                containerClass="todo-checkbox"
+                innerClass="todo-checkbox"
+                isPersistent={true}
             />
             <Strikethrough
                 innerContent={props.text}
