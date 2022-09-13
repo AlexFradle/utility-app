@@ -45,7 +45,7 @@
 .nav-item.sel-expand-button-inner::before {
     font-size: 1em;
     content: "[";
-    color: black;
+    color: var(--background-col);
     transition: all var(--animation-time);
 }
 
@@ -60,6 +60,6 @@
 .nav-item.sel-expand-button-inner::after {
     font-size: 1em;
     content: "]";
-    color: black;
+    color: var(--background-col);
     transition: all var(--animation-time);
 }

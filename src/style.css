@@ -6,6 +6,7 @@
 :root {
     --main-col: #00ff00;
     --accent-col: #005f00;
+    --background-col: #000000;
     --animation-time: 0.2s;
     --animation-time-sec: 1s;
 }

@@ -38,20 +38,18 @@ const TodoScreen = () => {
                         />
                     );
                 })}
-                <div
-                    style={{ 
-                        backgroundColor: "var(--main-col)",
-                        color: "black",
-                        margin: 5,
-                    }}
-                    onClick={addTodo}
-                >
-                    Add TODO
-                </div>
+                <ClickableButton
+                    id="add-todo"
+                    innerContent="Add TODO"
+                    backgroundColor="black"
+                    onClick={() => {addTodo()}}
+                />
             </ContentBox>
             <ClickableButton
                 id="test-click"
                 innerContent="test"
+                backgroundColor="black"
+                onClick={() => {}}
             />
             <input type="range" />
         </div>
