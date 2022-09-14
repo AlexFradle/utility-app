@@ -9,4 +9,5 @@
     opacity: 0;
     text-align: center;
     transition: opacity var(--animation-time-sec) calc(var(--animation-time) * 2);
+    margin: 2px;
 }

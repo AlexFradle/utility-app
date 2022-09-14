@@ -32,28 +32,26 @@ const NavBar = (props: NavBarProps) => {
     };
 
     return (
-        <>
-            <div className="nav-container" onMouseLeave={() => {moveIndicator(-1)}}>
-                {props.titles.map((title, ind) => {
-                    return (
-                        <ExpandButton 
-                            innerContent={title}
-                            innerClass="nav-item"
-                            innerAttributes={{ onMouseOver: () => {moveIndicator(ind)} }}
-                            id={`nav-${ind}`}
-                            key={`nav-${ind}`}
-                            type={AnimationType.CenterWidth}
-                            isExpanded={ind === props.selectedIndex}
-                            expandCallback={_ => {props.indCallback(ind)}}
-                            isToggle={false}
-                            bgFade={true}
-                            isPersistent={true}
-                        />
-                    );
-                })}
-            </div>
+        <div className="nav-container" onMouseLeave={() => {moveIndicator(-1)}}>
+            {props.titles.map((title, ind) => {
+                return (
+                    <ExpandButton 
+                        innerContent={title}
+                        innerClass="nav-item"
+                        innerAttributes={{ onMouseOver: () => {moveIndicator(ind)} }}
+                        id={`nav-${ind}`}
+                        key={`nav-${ind}`}
+                        type={AnimationType.CenterWidth}
+                        isExpanded={ind === props.selectedIndex}
+                        expandCallback={_ => {props.indCallback(ind)}}
+                        isToggle={false}
+                        bgFade={true}
+                        isPersistent={true}
+                    />
+                );
+            })}
             <div id="hover-indicator"></div>
-        </>
+        </div>
     );
 };
 export default NavBar;

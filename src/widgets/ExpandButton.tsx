@@ -66,6 +66,7 @@ const ExpandButton = (props: ExpandButtonProps) => {
             className={`expand-button-outer ${props.outerClass ?? ""}`}
             style={!props.bgFade ? { backgroundColor: "var(--main-col)" } : undefined}
             id={`${getOuterId()}${id ?? ""}`}
+            key={`${getOuterId()}${id ?? ""}`}
             {...props.outerAttributes}
         ></div>
     );
@@ -78,7 +79,8 @@ const ExpandButton = (props: ExpandButtonProps) => {
 
     return (
         <>
-            {props.isPersistent ? makeOuter() : outers}
+            {/* needs outer div to not error :( */}
+            <div>{props.isPersistent ? makeOuter() : outers}</div>
             <div
                 id={getInnerId()}
                 onClick={() => {

@@ -20,6 +20,9 @@ body {
     background-color: rgba(0, 0, 0, 0.8);
     font-family: JetBrainsMono;
     font-size: 12pt;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 input[type="range"] {

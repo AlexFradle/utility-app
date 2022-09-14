@@ -1,7 +1,10 @@
 .nav-container {
+    position: sticky;
+    top: 0;
+    background-color: var(--background-col);
     display: grid;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     grid-auto-columns: 1fr;
 }
 

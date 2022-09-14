@@ -51,6 +51,12 @@ const TodoScreen = () => {
                 backgroundColor="black"
                 onClick={() => {}}
             />
+            <ClickableButton
+                id="test-click-2"
+                innerContent="test"
+                onClick={() => {}}
+                type={AnimationType.CenterWidthHeight}
+            />
             <input type="range" />
         </div>
     );

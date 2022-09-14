@@ -28,9 +28,8 @@ const ClickableButton = (props: ClickableButtonProps) => {
                     style={{
                         backgroundColor: props.backgroundColor ?? "none",
                         border: "2px solid transparent",
-                        clipPath: "padding-box",
+                        clipPath: "inset(2px 2px 2px 2px)",
                         color: "var(--main-col)",
-                        margin: 5,
                     }}
                 >
                     {props.innerContent}

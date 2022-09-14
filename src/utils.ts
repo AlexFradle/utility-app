@@ -35,6 +35,8 @@ export const animate = (
     const inner = document.getElementById(innerObjId);
     if (self === null || inner === null) return;
     const dims = inner.getBoundingClientRect();
+    dims.x += window.scrollX;
+    dims.y += window.scrollY;
     if (beforeFunc !== undefined) beforeFunc(self, inner);
     if (isExpand) {
         switch (type) {
