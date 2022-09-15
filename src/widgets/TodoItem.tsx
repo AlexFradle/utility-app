@@ -26,7 +26,6 @@ const TodoItem = (props: TodoItemProps) => {
                 type={AnimationType.CenterExpand}
                 innerContent=""
                 isToggle={true}
-                bgFade={true}
                 innerClass="todo-checkbox"
                 isPersistent={true}
             />

@@ -4,6 +4,8 @@ import ContentBox from "../widgets/ContentBox";
 import TodoItem from "../widgets/TodoItem";
 import ClickableButton from "../widgets/ClickableButton";
 import ExpandButton from "../widgets/ExpandButton";
+import Calendar from "../widgets/Calendar";
+import "./TodoScreen.css";
 
 const TodoScreen = () => {
     const [todoItems, setTodoItems] = useState<[string, boolean][]>([
@@ -45,17 +47,17 @@ const TodoScreen = () => {
                     onClick={() => {addTodo()}}
                 />
             </ContentBox>
+            <ContentBox
+                id="cal-box"
+                type={AnimationType.CenterWidthHeight}
+            >
+                <Calendar />
+            </ContentBox>
             <ClickableButton
-                id="test-click"
+                id="test"
                 innerContent="test"
                 backgroundColor="black"
                 onClick={() => {}}
-            />
-            <ClickableButton
-                id="test-click-2"
-                innerContent="test"
-                onClick={() => {}}
-                type={AnimationType.CenterWidthHeight}
             />
             <input type="range" />
         </div>

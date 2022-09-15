@@ -12,7 +12,6 @@ type ExpandButtonProps = {
     type: AnimationType;
     innerContent: ReactNode;
     isPersistent: boolean;
-    bgFade: boolean;
 
     // true:  pressing will toggle on and off
     // false: press will only expand (NavBar)
@@ -64,7 +63,6 @@ const ExpandButton = (props: ExpandButtonProps) => {
     const makeOuter = (id?: string) => (
         <div
             className={`expand-button-outer ${props.outerClass ?? ""}`}
-            style={!props.bgFade ? { backgroundColor: "var(--main-col)" } : undefined}
             id={`${getOuterId()}${id ?? ""}`}
             key={`${getOuterId()}${id ?? ""}`}
             {...props.outerAttributes}

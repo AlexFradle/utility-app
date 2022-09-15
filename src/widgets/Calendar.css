@@ -1,0 +1,17 @@
+.cal-area {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.cal-cell {
+    border: 2px solid transparent;
+}
+
+.cal-day {
+    border-bottom: 2px solid var(--main-col);
+    margin-bottom: 5px;
+}
+
+.cal-cell:hover {
+    border: 2px solid var(--accent-col);
+}

@@ -18,11 +18,11 @@ const ClickableButton = (props: ClickableButtonProps) => {
             id={props.id}
             type={props.type ?? AnimationType.CenterWidth}
             isToggle={false}
-            bgFade={false}
             isPersistent={false}
             isExpanded={false}
             expandCallback={_ => {props.onClick()}}
             outerClass="clickable-button"
+            outerAttributes={{ style: {backgroundColor: "var(--main-col)"} }}
             innerContent={(
                 <div
                     style={{

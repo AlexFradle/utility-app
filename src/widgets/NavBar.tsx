@@ -45,7 +45,6 @@ const NavBar = (props: NavBarProps) => {
                         isExpanded={ind === props.selectedIndex}
                         expandCallback={_ => {props.indCallback(ind)}}
                         isToggle={false}
-                        bgFade={true}
                         isPersistent={true}
                     />
                 );
